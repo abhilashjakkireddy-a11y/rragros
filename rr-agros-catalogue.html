@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RR Agros — Product Catalogue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --ink:     #0E1A10;
+  --earth:   #1C3220;
+  --field:   #2C5438;
+  --water:   #1B6389;
+  --droplet: #3B9EC4;
+  --bone:    #F0EAD8;
+  --cream:   #F7F2E8;
+  --sand:    #E8DFC8;
+  --mid:     #7A8878;
+  --amber:   #B8821A;
+  --amber-l: #D4A030;
+  --white:   #FDFAF4;
+  --red:     #C0181A;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  min-height: 100vh;
+}
+
+body::before {
+  content:''; position:fixed; inset:0; z-index:9999; pointer-events:none;
+  opacity:0.032;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px 180px; mix-blend-mode:multiply;
+}
+
+/* ── NAV ── */
+nav {
+  background: var(--ink);
+  padding: 22px 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid rgba(44,84,56,0.2);
+}
+.nav-logo { display:flex; flex-direction:column; text-decoration:none; }
+.nav-logo-rr { font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--white); line-height:0.88; letter-spacing:0.02em; }
+.nav-logo-agros { font-size:10px; font-weight:600; letter-spacing:0.38em; text-transform:uppercase; color:var(--droplet); margin-top:3px; }
+.nav-back { font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(240,234,216,0.5); text-decoration:none; display:flex; align-items:center; gap:8px; transition:color 0.2s; }
+.nav-back::before { content:'←'; font-size:15px; }
+.nav-back:hover { color:var(--white); }
+
+/* ── HEADER ── */
+.header {
+  padding: 80px 64px 64px;
+  border-bottom: 1px solid rgba(14,26,16,0.08);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 60px;
+}
+.header-left {}
+.header-eyebrow {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+}
+.header-tag {
+  background: var(--red); color: #fff;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 5px 14px;
+}
+.header-sub {
+  font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--mid);
+}
+.header-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 7vw, 96px);
+  line-height: 0.88; color: var(--ink); letter-spacing: 0.01em;
+}
+.header-title span { color: var(--field); }
+.header-right {
+  flex-shrink: 0;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 20px;
+}
+.download-btn {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  background: var(--ink); color: var(--white);
+  padding: 16px 32px; text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.3s; display: flex; align-items: center; gap: 10px; white-space: nowrap;
+}
+.download-btn:hover { background: var(--field); }
+.header-stats { display: flex; gap: 40px; }
+.h-stat { text-align: right; }
+.h-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px; color: var(--ink); line-height: 1; letter-spacing: 0.02em;
+}
+.h-stat-num em { font-style:normal; font-size:16px; color:var(--amber); }
+.h-stat-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--mid); margin-top: 3px;
+}
+
+/* ── CATEGORY LIST ── */
+.cat-list {
+  padding: 0 64px;
+}
+
+.cat-row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto 40px;
+  align-items: center;
+  gap: 40px;
+  padding: 36px 0;
+  border-bottom: 1px solid rgba(14,26,16,0.07);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.cat-row::before {
+  content: '';
+  position: absolute;
+  left: -64px; right: -64px;
+  top: 0; bottom: 0;
+  background: var(--ink);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 0;
+}
+
+.cat-row:hover::before { opacity: 1; }
+.cat-row:hover .cat-row-num { color: rgba(240,234,216,0.25); }
+.cat-row:hover .cat-row-title { color: var(--white); }
+.cat-row:hover .cat-row-desc { color: rgba(240,234,216,0.45); }
+.cat-row:hover .cat-row-sizes { color: var(--droplet); }
+.cat-row:hover .cat-row-count { color: rgba(240,234,216,0.35); }
+.cat-row:hover .cat-row-arrow { color: var(--amber-l); transform: translateX(6px); }
+.cat-row:hover .cat-badge { background: var(--droplet); color: var(--white); }
+
+.cat-row > * { position: relative; z-index: 1; }
+
+.cat-row-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px; letter-spacing: 0.2em;
+  color: rgba(14,26,16,0.2); transition: color 0.3s;
+  align-self: flex-start;
+  padding-top: 4px;
+}
+
+.cat-row-main { display: flex; flex-direction: column; gap: 10px; }
+
+.cat-row-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px; color: var(--ink); line-height: 1;
+  letter-spacing: 0.02em; transition: color 0.3s;
+}
+
+.cat-row-desc {
+  font-size: 14px; font-weight: 400; line-height: 1.7;
+  color: var(--mid); max-width: 560px; transition: color 0.3s;
+}
+
+.cat-row-meta {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+  text-align: right;
+}
+
+.cat-row-sizes {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--field); transition: color 0.3s;
+}
+
+.cat-row-count {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--mid); transition: color 0.3s;
+}
+
+.cat-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--field); border: 1px solid rgba(44,84,56,0.4);
+  padding: 5px 12px; transition: all 0.3s; white-space: nowrap;
+}
+
+.cat-row-arrow {
+  font-size: 20px; color: rgba(14,26,16,0.2);
+  transition: all 0.3s;
+}
+
+/* ── BOTTOM ── */
+.bottom {
+  padding: 72px 64px;
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  border-top: 1px solid rgba(14,26,16,0.07);
+  margin-top: 16px;
+}
+.bottom-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 4vw, 52px); color: var(--ink); line-height: 0.95;
+}
+.bottom-title span { color: var(--field); }
+.bottom-sub {
+  font-size: 14px; font-weight: 400; color: var(--mid);
+  margin-top: 10px; line-height: 1.6; max-width: 380px;
+}
+.bottom-actions { display: flex; gap: 14px; flex-shrink: 0; }
+.btn-dark {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  background: var(--ink); color: var(--white);
+  padding: 15px 32px; text-decoration: none; transition: all 0.3s;
+}
+.btn-dark:hover { background: var(--field); }
+.btn-outline {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink); border: 1px solid rgba(14,26,16,0.25);
+  padding: 15px 32px; text-decoration: none; transition: all 0.3s;
+}
+.btn-outline:hover { border-color: var(--ink); }
+
+/* FOOTER */
+footer {
+  background: var(--ink); padding: 28px 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.f-rr { font-family:'Bebas Neue',sans-serif; font-size:22px; color:rgba(240,234,216,0.25); letter-spacing:0.02em; }
+.f-agros { font-size:9px; font-weight:600; letter-spacing:0.38em; text-transform:uppercase; color:rgba(59,158,196,0.25); margin-top:2px; }
+.f-copy { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:rgba(240,234,216,0.15); }
+
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 768px) {
+
+  /* ── HOME ── */
+  nav {
+    padding: 18px 24px !important;
+  }
+  .nav-links { display: none !important; }
+  .nav-enquire { padding: 8px 16px !important; font-size: 10px !important; }
+  .nav-logo-rr, .nav-logo-agros { font-size: 26px !important; }
+
+  .hero { min-height: 100svh; }
+  .hero-content {
+    grid-template-columns: 1fr !important;
+    padding: 0 24px 48px !important;
+  }
+  .hero-headline { font-size: clamp(52px, 15vw, 80px) !important; }
+  .hero-right { display: none !important; }
+  .hero-sub { font-size: 14px !important; }
+  .hero-eyebrow { font-size: 10px !important; }
+  .eyebrow-tag { font-size: 10px !important; padding: 5px 10px !important; }
+
+  .marquee-band { padding: 10px 0 !important; }
+
+  .intro {
+    grid-template-columns: 1fr !important;
+    padding: 60px 24px !important;
+    gap: 40px !important;
+  }
+  .intro-right {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .intro-heading { font-size: clamp(36px, 10vw, 52px) !important; }
+
+  .products { padding: 60px 24px !important; }
+  .product-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .product-name { font-size: 22px !important; }
+  .section-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  .field-divider { height: 320px !important; }
+  .field-divider-quote { font-size: clamp(26px, 7vw, 40px) !important; }
+
+  .why { padding: 60px 24px !important; }
+  .why-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+  }
+
+  .contact-strip {
+    flex-direction: column !important;
+    padding: 48px 24px !important;
+    align-items: flex-start !important;
+    gap: 28px !important;
+  }
+  .contact-numbers { flex-direction: column !important; gap: 16px !important; }
+  .contact-heading { font-size: clamp(32px, 9vw, 48px) !important; }
+
+  footer { padding: 24px !important; flex-direction: column !important; gap: 12px !important; align-items: flex-start !important; }
+
+  /* Pipe canvases — hide on mobile */
+  #pipe-left, #pipe-right { display: none !important; }
+
+  /* ── CATALOGUE ── */
+  nav { padding: 18px 24px !important; }
+  .header {
+    flex-direction: column !important;
+    padding: 48px 24px 40px !important;
+    align-items: flex-start !important;
+    gap: 32px !important;
+  }
+  .header-title { font-size: clamp(42px, 12vw, 64px) !important; }
+  .header-right { align-items: flex-start !important; width: 100% !important; }
+  .download-btn { width: 100% !important; justify-content: center !important; }
+  .header-stats { gap: 24px !important; }
+
+  .cat-list { padding: 0 24px !important; }
+  .cat-row {
+    grid-template-columns: 40px 1fr 24px !important;
+    gap: 16px !important;
+    padding: 28px 0 !important;
+  }
+  .cat-row-meta { display: none !important; }
+  .cat-row-title { font-size: 26px !important; }
+  .cat-row-desc { font-size: 13px !important; }
+
+  .bottom {
+    flex-direction: column !important;
+    padding: 48px 24px !important;
+    gap: 28px !important;
+  }
+  .bottom-actions { flex-direction: column !important; width: 100% !important; }
+  .btn-dark, .btn-outline { text-align: center !important; width: 100% !important; }
+
+  /* ── LAYFLAT ── */
+  .hero-inner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 32px !important;
+    padding: 48px 24px 40px !important;
+  }
+  .hero { padding: 0 !important; }
+  .hero-sub { max-width: 100% !important; }
+  .hero-right { width: 100% !important; align-items: flex-start !important; }
+  .hero-stats { gap: 0 !important; }
+  .download-btn { width: 100% !important; text-align: center !important; justify-content: center !important; }
+
+  .section-wrap { padding: 48px 24px !important; }
+  .section-title { font-size: clamp(32px, 9vw, 48px) !important; margin-bottom: 32px !important; }
+
+  .prod-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .prod-img-wrap { height: 140px !important; }
+  .prod-img { width: 110px !important; height: 110px !important; }
+  .prod-name { font-size: 16px !important; }
+  .prod-body { padding: 14px 14px 12px !important; gap: 6px !important; }
+  .prod-enquire { font-size: 9px !important; padding: 8px 8px !important; }
+
+  .cta-strip {
+    flex-direction: column !important;
+    padding: 48px 24px !important;
+    gap: 24px !important;
+  }
+  .cta-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .btn-primary, .btn-ghost, .btn-secondary {
+    text-align: center !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid { grid-template-columns: 1fr !important; }
+  .why-grid { grid-template-columns: 1fr !important; }
+  .intro-right { grid-template-columns: 1fr 1fr !important; }
+  .prod-grid { grid-template-columns: 1fr 1fr !important; }
+  .hero-headline { font-size: clamp(44px, 14vw, 64px) !important; }
+  .cat-row-num { display: none !important; }
+  .cat-row { grid-template-columns: 1fr 24px !important; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="rr-agros-home.html" class="nav-logo">
+    <span class="nav-logo-rr">RR</span>
+    <span class="nav-logo-agros">AGROS</span>
+  </a>
+  <a href="rr-agros-home.html" class="nav-back">Back to Home</a>
+</nav>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-eyebrow">
+      <span class="header-tag">Manufacturer</span>
+      <span class="header-sub">Drip Irrigation Systems</span>
+    </div>
+    <div class="header-title">Product<br><span>Catalogue.</span></div>
+  </div>
+  <div class="header-right">
+    <div class="header-stats">
+      <div class="h-stat">
+        <div class="h-stat-num">150<em>+</em></div>
+        <div class="h-stat-label">Products</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num">7</div>
+        <div class="h-stat-label">Categories</div>
+      </div>
+    </div>
+    <a href="RR_AGROS_FITTINGS_CATALOUGE.pdf" download="RR_Agros_Catalogue.pdf" class="download-btn">
+      ↓ &nbsp;Download Full Catalogue
+    </a>
+  </div>
+</div>
+
+<div class="cat-list">
+  
+    <a class="cat-row" href="rr-agros-catalogue.html">
+      <div class="cat-row-num">01</div>
+      <div class="cat-row-main">
+        <div class="cat-row-title">Round Drip Fittings</div>
+        <div class="cat-row-desc">Lateral cocks, joiners, tees, elbows, Y-tees, end caps, water dippers, grommets and punching tools for 16mm round drip systems.</div>
+      </div>
+      <div class="cat-row-meta">
+        <div class="cat-row-sizes">16MM</div>
+        <div class="cat-row-count">24 products</div>
+        
+      </div>
+      <div class="cat-row-arrow">→</div>
+    </a>
+    <a class="cat-row" href="rr-agros-catalogue.html">
+      <div class="cat-row-num">02</div>
+      <div class="cat-row-main">
+        <div class="cat-row-title">Flat Drip Fittings</div>
+        <div class="cat-row-desc">Pepsi-style cocks, joiners, elbows, tees, two-way cocks, caps and elbow takeoffs for flat drip tape irrigation.</div>
+      </div>
+      <div class="cat-row-meta">
+        <div class="cat-row-sizes">16MM</div>
+        <div class="cat-row-count">12 products</div>
+        
+      </div>
+      <div class="cat-row-arrow">→</div>
+    </a>
+    <a class="cat-row" href="rr-agros-catalogue.html">
+      <div class="cat-row-num">03</div>
+      <div class="cat-row-main">
+        <div class="cat-row-title">20MM Systems</div>
+        <div class="cat-row-desc">Lateral cocks, pepsi cocks, joiners, endcaps, grommets and punching machines for larger 20mm field applications.</div>
+      </div>
+      <div class="cat-row-meta">
+        <div class="cat-row-sizes">16MM · 20MM</div>
+        <div class="cat-row-count">10 products</div>
+        
+      </div>
+      <div class="cat-row-arrow">→</div>
+    </a>
+    <a class="cat-row" href="rr-agros-layflat.html">
+      <div class="cat-row-num">04</div>
+      <div class="cat-row-main">
+        <div class="cat-row-title">Lay Flat Fittings</div>
+        <div class="cat-row-desc">Ball valves, elbows, tees, FTA, MTA, ring joiners, joiners, endcaps and punch tools. Up to 6 BAR pressure. HDPE/PP.</div>
+      </div>
+      <div class="cat-row-meta">
+        <div class="cat-row-sizes">63MM · 75MM · 90MM</div>
+        <div class="cat-row-count">15 products</div>
+        <span class="cat-badge">View Products →</span>
+      </div>
+      <div class="cat-row-arrow">→</div>
+    </a>
+    <a class="cat-row" href="rr-agros-catalogue.html">
+      <div class="cat-row-num">05</div>
+      <div class="cat-row-main">
+        <div class="cat-row-title">Rain Pipe Fittings</div>
+        <div class="cat-row-desc">Rain pipe cocks, joiners, endcaps, takeoffs, grommets, drill bits and punching machines for sprinkler-style systems.</div>
+      </div>
+      <div class="cat-row-meta">
+        <div class="cat-row-sizes">32MM · 40MM</div>
+        <div class="cat-row-count">11 products</div>
+        
+      </div>
+      <div class="cat-row-arrow">→</div>
+    </a>
+    <a class="cat-row" href="rr-agros-catalogue.html">
+      <div class="cat-row-num">06</div>
+      <div class="cat-row-main">
+        <div class="cat-row-title">Drip Fittings & Filters</div>
+        <div class="cat-row-desc">Drip pipes, micro sprinklers, foggers, connectors, stoppers, screen filters 2"–3", venturi injectors and winding machines.</div>
+      </div>
+      <div class="cat-row-meta">
+        <div class="cat-row-sizes">4MM · 6MM · 8MM</div>
+        <div class="cat-row-count">16 products</div>
+        
+      </div>
+      <div class="cat-row-arrow">→</div>
+    </a>
+    <a class="cat-row" href="rr-agros-catalogue.html">
+      <div class="cat-row-num">07</div>
+      <div class="cat-row-main">
+        <div class="cat-row-title">Ball Valves</div>
+        <div class="cat-row-desc">Standard ball valves, flush valves, union ball valves and three-way ball valves across a full size range for main line control.</div>
+      </div>
+      <div class="cat-row-meta">
+        <div class="cat-row-sizes">½" · ¾" · 1" to 4"</div>
+        <div class="cat-row-count">11 products</div>
+        
+      </div>
+      <div class="cat-row-arrow">→</div>
+    </a>
+</div>
+
+<div class="bottom">
+  <div>
+    <div class="bottom-title">Ready to <span>Order?</span></div>
+    <p class="bottom-sub">Call directly or send a WhatsApp — our team responds fast to dealer and distributor enquiries.</p>
+  </div>
+  <div class="bottom-actions">
+    <a href="https://wa.me/916300996391" target="_blank" class="btn-dark">WhatsApp Us</a>
+    <a href="tel:6300996391" class="btn-outline">Call Now</a>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="f-rr">RR</div>
+    <div class="f-agros">Agros</div>
+  </div>
+  <span class="f-copy">© 2025 RR Agros Drip Irrigation Systems</span>
+</footer>
+
+</body>
+</html>

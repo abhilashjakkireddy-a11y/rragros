@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RR Agros — Lay Flat Fittings Catalogue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --ink:     #0E1A10;
+  --earth:   #1C3220;
+  --field:   #2C5438;
+  --water:   #1B6389;
+  --droplet: #3B9EC4;
+  --bone:    #F0EAD8;
+  --cream:   #F7F2E8;
+  --sand:    #E8DFC8;
+  --mid:     #8A9080;
+  --amber:   #B8821A;
+  --amber-l: #D4A030;
+  --white:   #FDFAF4;
+  --red:     #C0181A;
+}
+html { scroll-behavior:smooth; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+}
+body::before {
+  content:''; position:fixed; inset:0; z-index:9999; pointer-events:none;
+  opacity:0.032;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px 180px; mix-blend-mode:multiply;
+}
+
+/* NAV */
+.nav {
+  background: var(--ink); padding: 20px 56px;
+  display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:100;
+  border-bottom: 1px solid rgba(44,84,56,0.25);
+}
+.nav-logo { display:flex; flex-direction:column; text-decoration:none; }
+.nav-logo-rr { font-family:'Bebas Neue',sans-serif; font-size:34px; color:var(--white); line-height:0.88; letter-spacing:0.02em; }
+.nav-logo-agros { font-size:10px; font-weight:600; letter-spacing:0.38em; text-transform:uppercase; color:var(--droplet); margin-top:3px; }
+.nav-back { font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(240,234,216,0.55); text-decoration:none; display:flex; align-items:center; gap:8px; transition:color 0.2s; }
+.nav-back::before { content:'←'; font-size:16px; }
+.nav-back:hover { color:var(--white); }
+
+/* HERO */
+.hero {
+  background: var(--ink); padding: 72px 56px 64px;
+  position:relative; overflow:hidden;
+  border-bottom: 1px solid rgba(44,84,56,0.2);
+}
+.hero::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 15% 50%, rgba(44,84,56,0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 20%, rgba(27,94,122,0.22) 0%, transparent 50%);
+  pointer-events:none;
+}
+.hero-inner { position:relative; z-index:1; display:flex; align-items:flex-end; justify-content:space-between; gap:40px; }
+.hero-eyebrow { display:flex; align-items:center; gap:14px; margin-bottom:20px; }
+.hero-tag { background:var(--red); color:#fff; font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding:6px 16px; }
+.hero-eyebrow-text { font-size:12px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:rgba(240,234,216,0.5); }
+.hero-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(52px,6.5vw,88px); line-height:0.9; color:var(--white); letter-spacing:0.01em; margin-bottom:18px; }
+.hero-title span { color:var(--amber-l); }
+.hero-sub { font-size:15px; font-weight:400; line-height:1.7; color:rgba(240,234,216,0.48); max-width:460px; }
+.hero-right { display:flex; flex-direction:column; align-items:flex-end; gap:18px; flex-shrink:0; }
+.download-btn { font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; background:var(--amber); color:var(--ink); padding:18px 40px; text-decoration:none; transition:all 0.3s; white-space:nowrap; }
+.download-btn:hover { background:var(--amber-l); transform:translateY(-2px); }
+.hero-stats { display:flex; gap:0; }
+.h-stat { text-align:right; padding:0 22px; border-right:1px solid rgba(240,234,216,0.08); }
+.h-stat:last-child { border-right:none; padding-right:0; }
+.h-stat-num { font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--white); line-height:1; }
+.h-stat-num em { font-style:normal; font-family:'Barlow',sans-serif; font-size:16px; color:var(--amber-l); }
+.h-stat-label { font-size:10px; font-weight:500; letter-spacing:0.24em; text-transform:uppercase; color:rgba(240,234,216,0.32); margin-top:4px; }
+
+/* SECTION HEADER */
+.section-wrap { padding: 72px 56px; }
+.section-eyebrow { font-size:10px; font-weight:600; letter-spacing:0.32em; text-transform:uppercase; color:var(--field); margin-bottom:10px; display:flex; align-items:center; gap:12px; }
+.section-eyebrow::before { content:''; width:24px; height:1px; background:var(--field); }
+.section-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(38px,5vw,60px); color:var(--ink); line-height:0.95; letter-spacing:0.01em; margin-bottom:52px; }
+
+/* PRODUCT GRID */
+.prod-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2px;
+  background: var(--ink);
+}
+
+.prod-card {
+  background: var(--white);
+  display:flex; flex-direction:column;
+  transition: all 0.32s;
+  overflow:hidden;
+}
+.prod-card:hover {
+  background: var(--ink);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 44px rgba(0,0,0,0.22);
+  z-index: 2;
+}
+.prod-card:hover .prod-name { color: var(--white); }
+.prod-card:hover .prod-sizes { color: var(--droplet); }
+.prod-card:hover .prod-specs { color: rgba(240,234,216,0.4); }
+.prod-card:hover .prod-enquire { background: var(--droplet); border-color: var(--droplet); color: var(--white); }
+.prod-card:hover .prod-img-wrap { background: #243828; }
+
+.prod-img-wrap {
+  background: #F5F0E6;
+  display:flex; align-items:center; justify-content:center;
+  height: 200px; overflow:hidden;
+  transition: background 0.32s;
+}
+.prod-img {
+  width: 160px; height: 160px;
+  object-fit: contain;
+  transition: transform 0.35s;
+}
+.prod-card:hover .prod-img { transform: scale(1.1); }
+
+.prod-body {
+  padding: 20px 20px 18px;
+  display:flex; flex-direction:column; gap:8px; flex:1;
+  border-top: 2px solid rgba(14,26,16,0.06);
+  transition: border-color 0.32s;
+}
+.prod-card:hover .prod-body { border-top-color: var(--field); }
+
+.prod-name {
+  font-family:'Bebas Neue',sans-serif;
+  font-size: 22px; color: var(--ink);
+  line-height: 1; letter-spacing: 0.03em;
+  transition: color 0.32s;
+}
+.prod-sizes {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--field);
+  transition: color 0.32s;
+}
+.prod-specs {
+  font-size: 12px; font-weight: 400;
+  color: var(--mid); letter-spacing: 0.04em;
+  transition: color 0.32s;
+}
+.prod-enquire {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--water);
+  text-decoration: none;
+  padding: 10px 14px;
+  border: 1px solid rgba(27,99,137,0.35);
+  text-align: center;
+  margin-top: auto;
+  transition: all 0.28s;
+}
+.prod-enquire:hover { background: var(--water); color: var(--white); }
+
+/* CTA */
+.cta-strip {
+  background: var(--earth); padding: 64px 56px;
+  display:flex; align-items:center; justify-content:space-between; gap:40px;
+  border-top: 1px solid rgba(44,84,56,0.2);
+}
+.cta-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(34px,4vw,52px); color:var(--white); line-height:0.95; }
+.cta-title span { color:var(--amber-l); }
+.cta-sub { font-size:14px; font-weight:400; color:rgba(240,234,216,0.42); margin-top:10px; line-height:1.6; }
+.cta-actions { display:flex; gap:14px; flex-shrink:0; }
+.btn-primary { font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; background:var(--amber); color:var(--ink); padding:16px 36px; text-decoration:none; transition:all 0.3s; }
+.btn-primary:hover { background:var(--amber-l); }
+.btn-ghost { font-size:13px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--bone); border:1px solid rgba(240,234,216,0.2); padding:16px 36px; text-decoration:none; transition:all 0.3s; }
+.btn-ghost:hover { border-color:rgba(240,234,216,0.5); }
+
+/* FOOTER */
+footer { background:var(--ink); padding:30px 56px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(44,84,56,0.1); }
+.f-logo-rr { font-family:'Bebas Neue',sans-serif; font-size:24px; color:rgba(240,234,216,0.28); letter-spacing:0.02em; }
+.f-logo-agros { font-size:9px; font-weight:600; letter-spacing:0.38em; text-transform:uppercase; color:rgba(59,158,196,0.28); margin-top:2px; }
+.f-copy { font-size:10px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:rgba(240,234,216,0.16); }
+
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 768px) {
+
+  /* ── HOME ── */
+  nav {
+    padding: 18px 24px !important;
+  }
+  .nav-links { display: none !important; }
+  .nav-enquire { padding: 8px 16px !important; font-size: 10px !important; }
+  .nav-logo-rr, .nav-logo-agros { font-size: 26px !important; }
+
+  .hero { min-height: 100svh; }
+  .hero-content {
+    grid-template-columns: 1fr !important;
+    padding: 0 24px 48px !important;
+  }
+  .hero-headline { font-size: clamp(52px, 15vw, 80px) !important; }
+  .hero-right { display: none !important; }
+  .hero-sub { font-size: 14px !important; }
+  .hero-eyebrow { font-size: 10px !important; }
+  .eyebrow-tag { font-size: 10px !important; padding: 5px 10px !important; }
+
+  .marquee-band { padding: 10px 0 !important; }
+
+  .intro {
+    grid-template-columns: 1fr !important;
+    padding: 60px 24px !important;
+    gap: 40px !important;
+  }
+  .intro-right {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .intro-heading { font-size: clamp(36px, 10vw, 52px) !important; }
+
+  .products { padding: 60px 24px !important; }
+  .product-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .product-name { font-size: 22px !important; }
+  .section-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  .field-divider { height: 320px !important; }
+  .field-divider-quote { font-size: clamp(26px, 7vw, 40px) !important; }
+
+  .why { padding: 60px 24px !important; }
+  .why-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+  }
+
+  .contact-strip {
+    flex-direction: column !important;
+    padding: 48px 24px !important;
+    align-items: flex-start !important;
+    gap: 28px !important;
+  }
+  .contact-numbers { flex-direction: column !important; gap: 16px !important; }
+  .contact-heading { font-size: clamp(32px, 9vw, 48px) !important; }
+
+  footer { padding: 24px !important; flex-direction: column !important; gap: 12px !important; align-items: flex-start !important; }
+
+  /* Pipe canvases — hide on mobile */
+  #pipe-left, #pipe-right { display: none !important; }
+
+  /* ── CATALOGUE ── */
+  nav { padding: 18px 24px !important; }
+  .header {
+    flex-direction: column !important;
+    padding: 48px 24px 40px !important;
+    align-items: flex-start !important;
+    gap: 32px !important;
+  }
+  .header-title { font-size: clamp(42px, 12vw, 64px) !important; }
+  .header-right { align-items: flex-start !important; width: 100% !important; }
+  .download-btn { width: 100% !important; justify-content: center !important; }
+  .header-stats { gap: 24px !important; }
+
+  .cat-list { padding: 0 24px !important; }
+  .cat-row {
+    grid-template-columns: 40px 1fr 24px !important;
+    gap: 16px !important;
+    padding: 28px 0 !important;
+  }
+  .cat-row-meta { display: none !important; }
+  .cat-row-title { font-size: 26px !important; }
+  .cat-row-desc { font-size: 13px !important; }
+
+  .bottom {
+    flex-direction: column !important;
+    padding: 48px 24px !important;
+    gap: 28px !important;
+  }
+  .bottom-actions { flex-direction: column !important; width: 100% !important; }
+  .btn-dark, .btn-outline { text-align: center !important; width: 100% !important; }
+
+  /* ── LAYFLAT ── */
+  .hero-inner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 32px !important;
+    padding: 48px 24px 40px !important;
+  }
+  .hero { padding: 0 !important; }
+  .hero-sub { max-width: 100% !important; }
+  .hero-right { width: 100% !important; align-items: flex-start !important; }
+  .hero-stats { gap: 0 !important; }
+  .download-btn { width: 100% !important; text-align: center !important; justify-content: center !important; }
+
+  .section-wrap { padding: 48px 24px !important; }
+  .section-title { font-size: clamp(32px, 9vw, 48px) !important; margin-bottom: 32px !important; }
+
+  .prod-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .prod-img-wrap { height: 140px !important; }
+  .prod-img { width: 110px !important; height: 110px !important; }
+  .prod-name { font-size: 16px !important; }
+  .prod-body { padding: 14px 14px 12px !important; gap: 6px !important; }
+  .prod-enquire { font-size: 9px !important; padding: 8px 8px !important; }
+
+  .cta-strip {
+    flex-direction: column !important;
+    padding: 48px 24px !important;
+    gap: 24px !important;
+  }
+  .cta-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .btn-primary, .btn-ghost, .btn-secondary {
+    text-align: center !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid { grid-template-columns: 1fr !important; }
+  .why-grid { grid-template-columns: 1fr !important; }
+  .intro-right { grid-template-columns: 1fr 1fr !important; }
+  .prod-grid { grid-template-columns: 1fr 1fr !important; }
+  .hero-headline { font-size: clamp(44px, 14vw, 64px) !important; }
+  .cat-row-num { display: none !important; }
+  .cat-row { grid-template-columns: 1fr 24px !important; }
+}
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="rr-agros-home.html" class="nav-logo">
+    <span class="nav-logo-rr">RR</span>
+    <span class="nav-logo-agros">AGROS</span>
+  </a>
+  <a href="rr-agros-catalogue.html" class="nav-back">Back to Catalogue</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="hero-tag">Lay Flat Fittings</span>
+        <span class="hero-eyebrow-text">Complete Product Range</span>
+      </div>
+      <div class="hero-title">Built for<br><span>Large Scale.</span></div>
+      <p class="hero-sub">HDPE/PP lay flat pipe fittings in 63MM, 75MM and 90MM — ball valves, elbows, tees, joiners, endcaps and punch tools. Up to 6 BAR pressure rating.</p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stats">
+        <div class="h-stat">
+          <div class="h-stat-num">15<em>+</em></div>
+          <div class="h-stat-label">Products</div>
+        </div>
+        <div class="h-stat">
+          <div class="h-stat-num">3</div>
+          <div class="h-stat-label">Sizes</div>
+        </div>
+        <div class="h-stat">
+          <div class="h-stat-num">6<em>B</em></div>
+          <div class="h-stat-label">Pressure Bar</div>
+        </div>
+      </div>
+      <a href="RR_AGROS_FITTINGS_CATALOUGE.pdf" download="RR_Agros_Catalogue.pdf" class="download-btn">
+        ↓ Download Catalogue
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section-wrap">
+  <div class="section-eyebrow">Lay Flat Fittings</div>
+  <div class="section-title">15 Products. Every Connection.</div>
+  <div class="prod-grid">
+    
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCACgAKADASIAAhEBAxEB/8QAGgABAAIDAQAAAAAAAAAAAAAAAAMFAQIEBv/EADcQAAICAQMBBgQEAgsAAAAAAAABAgMRBBIhURMiMUFhcQUUMrFSYpGhcuEjJDNCQ1OBgrLR8P/EABkBAQEBAQEBAAAAAAAAAAAAAAAEAQUCA//EAB0RAQADAAMBAQEAAAAAAAAAAAABAhEDEjEhIgT/2gAMAwEAAhEDEQA/APGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAT1aSdkVLMYp/iZpRDtLYry8WWTiwINP8OlOyO+UdvjLH2LD5DST4VW31UnwS0Vdnp1J4zMlhHGXnKSyzpcPDWKbaHP5ea3bKyr7vhemw412zjbjK3Ycf8AXoV09DqIPHZSl/Dz9i37CycnJ5y3k1dVilxkhvkz+YW02I/U/VQ9LqEsuixL+FiGk1FibjTY0ln6S32W+pnsbXzyzxj3qo+T1P8AkT/Q1+WuUtrqnn2LpU2eoens6MYzVStDa0m9sc+Tkd+l0ekfcsjKc0uXuwn7E1WnldHjyeDeGknVfVJrhy2vjqfTizvG+PHJvWc9HotKmo/Ld3wb5z+pwS+EyUpJWptZ4xyXi0NuoqU6oZUuUzGr0TjOucl9UVl+pR/RSkRtU3Be0zkvK21Spm4TWGjQuvi2j26btUl3Gs+zKUiWgAAAADo0fE3L0O1T3Tx7JHDp3iL9yep5uguskeo9ZK4k+7BNZXt/7oZjNV1WSSx4Lw9SCyLk493PdXkaXvs9FJYw3ZFfszq8k9eOXNpXbQ7atauMpMmv1VVe1RistZeShja8o3vubkufI5Wuji1+cj+FG61kF/diUatZntWNMXy11fnCJIviFXnXHOfI892ryHa+o0x36fVqudjjw3Nv9yfU/EpW1JNrO6L4XqikjN5lyZdjbivzI2s/SY+L/T/EFRSq5ynHa3xt9SRarfpo85Tbxn3K6c4P/Fin0af/AEYVm3Sww8998ou5c6yi497Q7NVi7S3V8cxZ5M9LC7+sSX5sfuebmts5Lo2jnyuhgAGNAABLU8RfuTad4vh7kFf0tepJXxbB9GbWcmGT4sZzalw/JG3xGbenjl576/4kNqeYtecUYubno5ZeWpr7NF977WYR1j9RLlUjM5ZaNUZl5HPWMbmbRk0srxNQBJOWUn4Nmm4wANc8m0H/AEkfdGMGa/7WPubX1lvFnZByWVOt/wC9EdjcdLSvzP7Glmmt27tjx454M2tKqiPRZ/f+RXyW2spqV/UDsauk1+LJVTe6cpdXk7XLCk/dnCRqwAAAABvW8Sx14JsY5OYlVzS5WQxY726oSWMeHKz6mU5W02wwvpysLHK5OTT6mLjKE+FjhkleohCabn+hTF4n1NNJjxEkjMsYNL7as5qzl84fgiB2SfmTTGSoj7DoyhlHPvl1Mbn1ZjXTlGHJHPl9WNz6sNdCaZvVHdJteSOTc+pNC9RjjBsevNonPjsazhLk21HNziuVBKP6fzIadRXXF2uSc19MMPxOX5iznvvk92tsY+dKzE6m1L2Q2+cvschmUnN5k236mDw+wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/9k=" alt="Layflat Ball Valve" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">Layflat Ball Valve</div>
+            <div class="prod-sizes">63MM · 75MM · 90MM</div>
+            <div class="prod-specs">HDPE/PP · Up to 6 BAR</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%20Layflat%20Ball%20Valve%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,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" alt="Layflat Elbow" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">Layflat Elbow</div>
+            <div class="prod-sizes">63MM · 75MM · 90MM</div>
+            <div class="prod-specs">HDPE/PP · Up to 6 BAR</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%20Layflat%20Elbow%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCACgAKADASIAAhEBAxEB/8QAGwABAAMBAQEBAAAAAAAAAAAAAAMEBQECBgf/xAA2EAACAQIEAwUGBQQDAAAAAAAAAQIDEQQSITEFQVETImFxkQYyUoGh4RQjQmLBM3KC0aKx8P/EABkBAQEBAQEBAAAAAAAAAAAAAAABAgMEBf/EABwRAQEAAwEBAQEAAAAAAAAAAAABAgMRIRIiMf/aAAwDAQACEQMRAD8A+MAAAAAAAAAAAAAACfB4d4mvGnst5PogIo05zvki5W3sridOdN2nCUX+5WPueE9nTgoUYRhCPRf+1NGtSoY2Lo4qnGpTfJ7ryLxOvzMF/jXDZcL4hOg3eD70H1i9igRQAAAAAAAAAAAAAAAAAADT4JH86pPK3aNjMNbgulLFNPW0dPUDd4VJqjJ73/2adOTVSyl8zL4X/Q12NKFsy5mmWN7cpN4CX6nGafldHyh9R7ayvUwMelKT26v7Hy5loAAAAAAAAAAAAAACanha9SGeFOTh8Wy9QIQWHgq6jmcY2vb3kRTpSg2nZ+KdwPBrcHeXDYmVtNNfXQylFt20+bNXhTUcLXTfebWl/ADZwDy4dPn9y9GpaWhQwmlCnpe6LkE3ZaLU0jI9tJXx+Gj8NBfVs+cN72xlfjCj8FGC/n+TBMqAAAAAAAAAAAAABdqVZQpU4U591RXO6uUiwtcLvtLboAWKqpWz6dLHO0zbxg/kRHLvqBYjle9KH1/2XaCjFdyCjdO9uZmKT6l/CZnGV23oEbdDu0oWW0V8i5ScpSjd3ba1RzCYeE8NBvSUm0n0suZzBKXa0lNNXl/JqDA9q5ZuP4lfDlX/ABRjmj7Qyz8cxrvf81r00M4yoAAAAAAAAAAAAAFiNvwu2rerK5YyuOGV7a6rUCFnLPodZy7WzYHqKd9maOETyyTTWnMzoylf3n6mhgm3mvd6c/NFR9Bhq1elTy0leD1ay3Vy1hqk62Mw6m07TTVopf8AR4wco/gWpTgru8U2rrr6knD3B43DKFPs8u6uUfGcVn2nFMXNfqrTf1ZUJcTLPiasus5P6kRlQAAAAAAAAAAACfCRUq6bipZe9lez8AI6dKdV91fPkWcR3IRjo7JJ28i3iMdUqpXw1KlGK3irNszqk8zfMCPTxPSjB7za/wATzYZfEIlhCjfWtJeUC/hlTTn2U5TjZayVuZnQptvdJdWXsMlBSUZKWi1RRuUrZYLnYu4GSji1L4acm/Qz4SyqK/atS5h3GMa86l8saMlK3TYD4hu7ucLfEMPSoV/yJuVJ7Zt9ioRQAAAAAAAAAACzgpWnJXd2tNCsTYWWWtG/PQDUwmNpUaqVShCqpNJqXLyPPH8HHD8TnGnT7OLSklp66GdWVpsjzy6sIlpYedapkha/i7I7XwtXDtKokk9mmRRqShJSi7NbNOx2daVSTlUcpN7tu9yjy7l3CWdOyTzX19SGhBTV5bItQozjLOvckreTOk124/TFzkvGvHaGvJF5RiuG42U/1QyrW2r2KFNdyPPuouYmaocMowmtK1R38kvuZxxuV5Fyy+Z18xxKyjSitbXvLmUDQ4tFwnTi9VZtPk9fsZ5myzytSyzsAARQAAAAAAAAAAWKEFXvF1IxnyzaJ/M8Tpyg2nydrp3RET0rOjPV3uiIhPVOGeaje1+ZLSnGE7zpqcdmmS1quHvTVCio296Wt38iz+p1IqDpZVye3iXWstBrq0ijTlevG5oTi500lraSPoyz4vHky79TrV4dRpYiap9rGLSS2HtHB0fwdF7xzvT5EFPhcszanUjm5xla2p3jdRVsbQpqWZ0qVpa3s29vRI8mn3Ocd9l/NZvElF8LTklmU0ou2vO5hGlxfEKUoYeL7tLWX932M0b8plsvDRjZh6AA4uwAAAAAAAAAABJSvaXSxGe4O0ZAdHMXHMjKelLa7s1szTo14tJSunvo7NPqmZMS5QengdsNtw8cs9f17GpPFV5wt29XL1ul9UjMxGPhQThh7Sm95co+XVlfiFRyyqN1B7eNikau7zmM4Y6fe5Xo3d3YAODuAAAAAAAAAAAAAATsAB6XgdVzwdUmgieCb5L1LMMkI3qT7vhoiiqslseZSlL3m2Q4lxNbt6l0rRStFdEQgFUAAAAAAAB//9k=" alt="Layflat Tee" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">Layflat Tee</div>
+            <div class="prod-sizes">63MM · 75MM · 90MM</div>
+            <div class="prod-specs">HDPE/PP · Up to 6 BAR</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%20Layflat%20Tee%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCACgAKADASIAAhEBAxEB/8QAGgABAAIDAQAAAAAAAAAAAAAAAAMEAQIFBv/EAC8QAAICAQQBAgQFBAMAAAAAAAABAgMRBBIhMUEyUQUTInFCUmGB4ZGhsdEjQ7L/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABcRAQEBAQAAAAAAAAAAAAAAAAABETH/2gAMAwEAAhEDEQA/APGAAAAAAAAAElFfzLEn6fL9kArpnb6Vx+Z9G09NOKbTjLHsy5Y8+l7UukacvxyQUAW7qd63L1FRrDwygAAAAAAAAAAAAAAAAASVVfM5ziK7AVUys5XpT5ZbjGNcdsV1/cwuEopYS6RIoOXJBhLJuoZN662+kTbMIogdf07o847XuU9TUvXH9zoSltllFezbn6fS+gOaDe6GybS68GgAAAAAAAAAAAAAk28ICSir5k+eIrtltJJJRWEujKrVcVBdrt+7N4RyQYhDLLdNLfJmmnL6OnXTGurL7KKU6flr5sIt/miiKyaxmLyn0yxdfseV17e5zrmoyzF5hLlfowNZyyRN+A5GreQNNTHdBS9iqX8bqpvxtZQAAAAAAAAAAAAWNFFO7dJZUFn9/BXLujjiiUveWP6L+QJkssmqjyiOES3SkkgLFK2rJpfqXjvgzOW2Jz758sDNl277kDnw0+maOZowNsm0IORiuOZYfT5yzS/Upw+XUsR/FL838EGLrUq3XHnLbb/QrAFAAAAAAAAAAADo6NZ0q79cv8I5x0NE86SWPw2f5X8CizBFishq5ZYjEDFvpOfdk6jWVgpXVAc9mE2iWcMEYGt0rFFRfofXHZAdCqUZRddizFlbU6d0yyuYP0yJogABQAAAAAAAAAAAu/DJZtnS/wDtjhfdcopG0JuE4zj3F5QHYre1lyvEim5qyML4rEbOcLw/KLNL8ognsrxHJRunjho6ed1bx2c3UVvGX/UKqTwyvLhk0uzSSyERJ4LNNqnFwsSlF9plZrkwnyLNGNTS6p8ZcH6WQnQqtjOLrsW6LK+o0sqfqX1QfUkJRXABQAAAAAAAAAAFrRahVScLG/lT7/R+504OVNmJHCOp8N1EbVHTWv6+qpP/AM/6IO3Ut0d0SvdCVybaxHwiXTSlTZtsWE/cu6nT4rdkX9OMt+Eiq8xqIOLZBu9y/rHFpSx36V5f6nNknnkg2a4z5NGjaMvAZUaJ4LFFz3rdhpeGV2SVprCXbIItTWq7Wo+lrK+xES6me+546XC/YiKAAAAAAAAAAABdgAem+Ea6vX1ujUtK6C4k/wAS9/uWKpT1E402Nyoz/wAdbe1Tfhyf5Tyunvnp7oW1tKUXlZWUex0Gqp+K6TdWtuphzJec/wCicVF8R+FPTR+Zu+Y5LmWML7JeEef1Fe1ntKL46ip0ajtHnfimkdNsljgo4j4NsrHJm2O0jXfIRld5Mynshn8T4QbSWWQSk5PLAwAAAAAAAAAAAAAAAAWNFq7NFqY3VPldr3XsVwB7VXw1tMdVpnz5XsVviGshZUlPm32XLZxPhuprhF022SqUnlSi/wCzLt2jdaai3tfflv7vyQcy1uUmyLrl8In1EoV8efZFOUnJ8lGZz3P2RqAAAAAAAAAAAAAAAAAAAAA3+dbt2/Mnt9tzwaAAAAAAAAAAAAAAA//Z" alt="Layflat FTA" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">Layflat FTA</div>
+            <div class="prod-sizes">63MM · 75MM · 90MM</div>
+            <div class="prod-specs">HDPE/PP · Up to 6 BAR</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%20Layflat%20FTA%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,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" alt="Layflat MTA" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">Layflat MTA</div>
+            <div class="prod-sizes">63MM · 75MM · 90MM</div>
+            <div class="prod-specs">HDPE/PP · Up to 6 BAR</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%20Layflat%20MTA%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCACgAKADASIAAhEBAxEB/8QAGgABAAIDAQAAAAAAAAAAAAAAAAMFAQIEBv/EADcQAAICAQMBBgQEAgsAAAAAAAABAgMRBBIhURMiMUFhcQUUMrFSYpGhcuEjJDNCQ1OBgrLR8P/EABkBAQEBAQEBAAAAAAAAAAAAAAAEAQUCA//EAB0RAQADAAMBAQEAAAAAAAAAAAABAhEDEjEhIgT/2gAMAwEAAhEDEQA/APGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAT1aSdkVLMYp/iZpRDtLYry8WWTiwINP8OlOyO+UdvjLH2LD5DST4VW31UnwS0Vdnp1J4zMlhHGXnKSyzpcPDWKbaHP5ea3bKyr7vhemw412zjbjK3Ycf8AXoV09DqIPHZSl/Dz9i37CycnJ5y3k1dVilxkhvkz+YW02I/U/VQ9LqEsuixL+FiGk1FibjTY0ln6S32W+pnsbXzyzxj3qo+T1P8AkT/Q1+WuUtrqnn2LpU2eoens6MYzVStDa0m9sc+Tkd+l0ekfcsjKc0uXuwn7E1WnldHjyeDeGknVfVJrhy2vjqfTizvG+PHJvWc9HotKmo/Ld3wb5z+pwS+EyUpJWptZ4xyXi0NuoqU6oZUuUzGr0TjOucl9UVl+pR/RSkRtU3Be0zkvK21Spm4TWGjQuvi2j26btUl3Gs+zKUiWgAAAADo0fE3L0O1T3Tx7JHDp3iL9yep5uguskeo9ZK4k+7BNZXt/7oZjNV1WSSx4Lw9SCyLk493PdXkaXvs9FJYw3ZFfszq8k9eOXNpXbQ7atauMpMmv1VVe1RistZeShja8o3vubkufI5Wuji1+cj+FG61kF/diUatZntWNMXy11fnCJIviFXnXHOfI892ryHa+o0x36fVqudjjw3Nv9yfU/EpW1JNrO6L4XqikjN5lyZdjbivzI2s/SY+L/T/EFRSq5ynHa3xt9SRarfpo85Tbxn3K6c4P/Fin0af/AEYVm3Sww8998ou5c6yi497Q7NVi7S3V8cxZ5M9LC7+sSX5sfuebmts5Lo2jnyuhgAGNAABLU8RfuTad4vh7kFf0tepJXxbB9GbWcmGT4sZzalw/JG3xGbenjl576/4kNqeYtecUYubno5ZeWpr7NF977WYR1j9RLlUjM5ZaNUZl5HPWMbmbRk0srxNQBJOWUn4Nmm4wANc8m0H/AEkfdGMGa/7WPubX1lvFnZByWVOt/wC9EdjcdLSvzP7Glmmt27tjx454M2tKqiPRZ/f+RXyW2spqV/UDsauk1+LJVTe6cpdXk7XLCk/dnCRqwAAAABvW8Sx14JsY5OYlVzS5WQxY726oSWMeHKz6mU5W02wwvpysLHK5OTT6mLjKE+FjhkleohCabn+hTF4n1NNJjxEkjMsYNL7as5qzl84fgiB2SfmTTGSoj7DoyhlHPvl1Mbn1ZjXTlGHJHPl9WNz6sNdCaZvVHdJteSOTc+pNC9RjjBsevNonPjsazhLk21HNziuVBKP6fzIadRXXF2uSc19MMPxOX5iznvvk92tsY+dKzE6m1L2Q2+cvschmUnN5k236mDw+wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/9k=" alt="Layflat Ring Joinner" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">Layflat Ring Joinner</div>
+            <div class="prod-sizes">63MM · 75MM · 90MM</div>
+            <div class="prod-specs">HDPE/PP · Up to 6 BAR</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%20Layflat%20Ring%20Joinner%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCACgAKADASIAAhEBAxEB/8QAGgABAAIDAQAAAAAAAAAAAAAAAAMFAQIEBv/EADcQAAICAQMBBgQEAgsAAAAAAAABAgMRBBIhURMiMUFhcQUUMrFSYpGhcuEjJDNCQ1OBgrLR8P/EABkBAQEBAQEBAAAAAAAAAAAAAAAEAQUCA//EAB0RAQADAAMBAQEAAAAAAAAAAAABAhEDEjEhIgT/2gAMAwEAAhEDEQA/APGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAT1aSdkVLMYp/iZpRDtLYry8WWTiwINP8OlOyO+UdvjLH2LD5DST4VW31UnwS0Vdnp1J4zMlhHGXnKSyzpcPDWKbaHP5ea3bKyr7vhemw412zjbjK3Ycf8AXoV09DqIPHZSl/Dz9i37CycnJ5y3k1dVilxkhvkz+YW02I/U/VQ9LqEsuixL+FiGk1FibjTY0ln6S32W+pnsbXzyzxj3qo+T1P8AkT/Q1+WuUtrqnn2LpU2eoens6MYzVStDa0m9sc+Tkd+l0ekfcsjKc0uXuwn7E1WnldHjyeDeGknVfVJrhy2vjqfTizvG+PHJvWc9HotKmo/Ld3wb5z+pwS+EyUpJWptZ4xyXi0NuoqU6oZUuUzGr0TjOucl9UVl+pR/RSkRtU3Be0zkvK21Spm4TWGjQuvi2j26btUl3Gs+zKUiWgAAAADo0fE3L0O1T3Tx7JHDp3iL9yep5uguskeo9ZK4k+7BNZXt/7oZjNV1WSSx4Lw9SCyLk493PdXkaXvs9FJYw3ZFfszq8k9eOXNpXbQ7atauMpMmv1VVe1RistZeShja8o3vubkufI5Wuji1+cj+FG61kF/diUatZntWNMXy11fnCJIviFXnXHOfI892ryHa+o0x36fVqudjjw3Nv9yfU/EpW1JNrO6L4XqikjN5lyZdjbivzI2s/SY+L/T/EFRSq5ynHa3xt9SRarfpo85Tbxn3K6c4P/Fin0af/AEYVm3Sww8998ou5c6yi497Q7NVi7S3V8cxZ5M9LC7+sSX5sfuebmts5Lo2jnyuhgAGNAABLU8RfuTad4vh7kFf0tepJXxbB9GbWcmGT4sZzalw/JG3xGbenjl576/4kNqeYtecUYubno5ZeWpr7NF977WYR1j9RLlUjM5ZaNUZl5HPWMbmbRk0srxNQBJOWUn4Nmm4wANc8m0H/AEkfdGMGa/7WPubX1lvFnZByWVOt/wC9EdjcdLSvzP7Glmmt27tjx454M2tKqiPRZ/f+RXyW2spqV/UDsauk1+LJVTe6cpdXk7XLCk/dnCRqwAAAABvW8Sx14JsY5OYlVzS5WQxY726oSWMeHKz6mU5W02wwvpysLHK5OTT6mLjKE+FjhkleohCabn+hTF4n1NNJjxEkjMsYNL7as5qzl84fgiB2SfmTTGSoj7DoyhlHPvl1Mbn1ZjXTlGHJHPl9WNz6sNdCaZvVHdJteSOTc+pNC9RjjBsevNonPjsazhLk21HNziuVBKP6fzIadRXXF2uSc19MMPxOX5iznvvk92tsY+dKzE6m1L2Q2+cvschmUnN5k236mDw+wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/9k=" alt="Layflat Joinner" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">Layflat Joinner</div>
+            <div class="prod-sizes">63MM · 75MM · 90MM</div>
+            <div class="prod-specs">HDPE/PP · Up to 6 BAR</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%20Layflat%20Joinner%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCACgAKADASIAAhEBAxEB/8QAGgABAAIDAQAAAAAAAAAAAAAAAAMFAQIEBv/EADcQAAICAQMBBgQEAgsAAAAAAAABAgMRBBIhURMiMUFhcQUUMrFSYpGhcuEjJDNCQ1OBgrLR8P/EABkBAQEBAQEBAAAAAAAAAAAAAAAEAQUCA//EAB0RAQADAAMBAQEAAAAAAAAAAAABAhEDEjEhIgT/2gAMAwEAAhEDEQA/APGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAT1aSdkVLMYp/iZpRDtLYry8WWTiwINP8OlOyO+UdvjLH2LD5DST4VW31UnwS0Vdnp1J4zMlhHGXnKSyzpcPDWKbaHP5ea3bKyr7vhemw412zjbjK3Ycf8AXoV09DqIPHZSl/Dz9i37CycnJ5y3k1dVilxkhvkz+YW02I/U/VQ9LqEsuixL+FiGk1FibjTY0ln6S32W+pnsbXzyzxj3qo+T1P8AkT/Q1+WuUtrqnn2LpU2eoens6MYzVStDa0m9sc+Tkd+l0ekfcsjKc0uXuwn7E1WnldHjyeDeGknVfVJrhy2vjqfTizvG+PHJvWc9HotKmo/Ld3wb5z+pwS+EyUpJWptZ4xyXi0NuoqU6oZUuUzGr0TjOucl9UVl+pR/RSkRtU3Be0zkvK21Spm4TWGjQuvi2j26btUl3Gs+zKUiWgAAAADo0fE3L0O1T3Tx7JHDp3iL9yep5uguskeo9ZK4k+7BNZXt/7oZjNV1WSSx4Lw9SCyLk493PdXkaXvs9FJYw3ZFfszq8k9eOXNpXbQ7atauMpMmv1VVe1RistZeShja8o3vubkufI5Wuji1+cj+FG61kF/diUatZntWNMXy11fnCJIviFXnXHOfI892ryHa+o0x36fVqudjjw3Nv9yfU/EpW1JNrO6L4XqikjN5lyZdjbivzI2s/SY+L/T/EFRSq5ynHa3xt9SRarfpo85Tbxn3K6c4P/Fin0af/AEYVm3Sww8998ou5c6yi497Q7NVi7S3V8cxZ5M9LC7+sSX5sfuebmts5Lo2jnyuhgAGNAABLU8RfuTad4vh7kFf0tepJXxbB9GbWcmGT4sZzalw/JG3xGbenjl576/4kNqeYtecUYubno5ZeWpr7NF977WYR1j9RLlUjM5ZaNUZl5HPWMbmbRk0srxNQBJOWUn4Nmm4wANc8m0H/AEkfdGMGa/7WPubX1lvFnZByWVOt/wC9EdjcdLSvzP7Glmmt27tjx454M2tKqiPRZ/f+RXyW2spqV/UDsauk1+LJVTe6cpdXk7XLCk/dnCRqwAAAABvW8Sx14JsY5OYlVzS5WQxY726oSWMeHKz6mU5W02wwvpysLHK5OTT6mLjKE+FjhkleohCabn+hTF4n1NNJjxEkjMsYNL7as5qzl84fgiB2SfmTTGSoj7DoyhlHPvl1Mbn1ZjXTlGHJHPl9WNz6sNdCaZvVHdJteSOTc+pNC9RjjBsevNonPjsazhLk21HNziuVBKP6fzIadRXXF2uSc19MMPxOX5iznvvk92tsY+dKzE6m1L2Q2+cvschmUnN5k236mDw+wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/9k=" alt="Layflat Endcap" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">Layflat Endcap</div>
+            <div class="prod-sizes">63MM · 75MM · 90MM</div>
+            <div class="prod-specs">HDPE/PP · Up to 6 BAR</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%20Layflat%20Endcap%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCACgAKADASIAAhEBAxEB/8QAGgABAAMBAQEAAAAAAAAAAAAAAAECAwQFBv/EADIQAAICAQMBBgMGBwAAAAAAAAABAhEDEiExBAUyQVFhcRMigSNCYpGhsQYUFsHR4fD/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABURAQEAAAAAAAAAAAAAAAAAAAAh/9oADAMBAAIRAxEAPwD4wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACnV1sAAAAAAAAAAAAAAAAABMISnJRirb4IOzocctetraqV+IGf8j1GpLRz42q/M7On7Hlka1Sc/TGv7nXGePBTl80vIiXamatOOWhfh2KjeH8NtrfGo+uTJRt/T0N/k6dvyWV/5PJlnySbcpyb9WRHNNPabX1EHrZOxepUJR+G3CSp6GpHiZ+yeoxt6F8SuUtpL6HZh7Q6nA7hll+Z6WHtqHUxUOuxxyfi4kvqB8k006fIPpu0ezsPUR+LjlrVbT+8vfzPnMuKWLI4S5XkRVAAAAAAAAAAAACVtJcsDfpcHxZ3LuLn1O+U4w2XsVio44qEVSX7lLsCrk5Pdi9w0vB7FQLJ3sG6dFW3ZFlF78hbKXRNgdvS9ZPC9LdxfKN+q6bH1WGUox1UtW3KPMTOvouplhyLfh2B5vU4oY5LRaT8G7aMD1O2unWLJDJjX2U1qj9f+o8sgAAAAAAAAHT0+NRcZy5W9HMdHTybhO3wtgOi/l53ZT1IvYWAbFlSUr4de4EwWqVO69CXBaqT/ADIipcqiXfeatAGopNbN+dkJlW3e4KNPqSnUtiq4IA780vj9muHMsb29n/tHiHr9PLacd94/tueTLl0QQAAAAAAAAb9P3ci9E/1MDXpn9rpf3k4gbXsRY38SAJF0qsgAWUvBrgtrTS3MyANJybit2URBKAsh4kJkpb+hR0YZ6HJ3XyM86aak9V36nW5KOOUn4tI5cuR5JJ70lSIKAAAAAAAABOna5QAHVKWqpL7279H4kWZxmnLd0nyW7rpgWTIDCAAP0IAsTaRWwBdU/cTdbL9DNySROr4cdb7z7q8vUCOolSjjT7vPuYBu2AAAAAAAAAAAAGsJqSqcuODIAbW0NSMbL38trd+KA0tCyi0tW7iTWLxyv6RAm0vEKTk6gm2Rqwx4jKXu6Es8nHTFKEfKIErTB3L5peXgjKUnKTbdti2QAAAAAAAAAAAAAAAAAJi3FprlEACZScnbdsgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//Z" alt="16MM Valve (Cock)" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">16MM Valve (Cock)</div>
+            <div class="prod-sizes">16MM</div>
+            <div class="prod-specs">UV Resistant · Leak-Proof</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%2016MM%20Valve%20(Cock)%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,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" alt="20MM Valve (Cock)" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">20MM Valve (Cock)</div>
+            <div class="prod-sizes">20MM</div>
+            <div class="prod-specs">UV Resistant · Leak-Proof</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%2020MM%20Valve%20(Cock)%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCACgAKADASIAAhEBAxEB/8QAGgABAAMBAQEAAAAAAAAAAAAAAAECAwQFBv/EADIQAAICAQMBBgMGBwAAAAAAAAABAhEDEiExBAUyQVFhcRMigSNCYpGhsQYUFsHR4fD/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABURAQEAAAAAAAAAAAAAAAAAAAAh/9oADAMBAAIRAxEAPwD4wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACnV1sAAAAAAAAAAAAAAAAABMISnJRirb4IOzocctetraqV+IGf8j1GpLRz42q/M7On7Hlka1Sc/TGv7nXGePBTl80vIiXamatOOWhfh2KjeH8NtrfGo+uTJRt/T0N/k6dvyWV/5PJlnySbcpyb9WRHNNPabX1EHrZOxepUJR+G3CSp6GpHiZ+yeoxt6F8SuUtpL6HZh7Q6nA7hll+Z6WHtqHUxUOuxxyfi4kvqB8k006fIPpu0ezsPUR+LjlrVbT+8vfzPnMuKWLI4S5XkRVAAAAAAAAAAAACVtJcsDfpcHxZ3LuLn1O+U4w2XsVio44qEVSX7lLsCrk5Pdi9w0vB7FQLJ3sG6dFW3ZFlF78hbKXRNgdvS9ZPC9LdxfKN+q6bH1WGUox1UtW3KPMTOvouplhyLfh2B5vU4oY5LRaT8G7aMD1O2unWLJDJjX2U1qj9f+o8sgAAAAAAAAHT0+NRcZy5W9HMdHTybhO3wtgOi/l53ZT1IvYWAbFlSUr4de4EwWqVO69CXBaqT/ADIipcqiXfeatAGopNbN+dkJlW3e4KNPqSnUtiq4IA780vj9muHMsb29n/tHiHr9PLacd94/tueTLl0QQAAAAAAAAb9P3ci9E/1MDXpn9rpf3k4gbXsRY38SAJF0qsgAWUvBrgtrTS3MyANJybit2URBKAsh4kJkpb+hR0YZ6HJ3XyM86aak9V36nW5KOOUn4tI5cuR5JJ70lSIKAAAAAAAABOna5QAHVKWqpL7279H4kWZxmnLd0nyW7rpgWTIDCAAP0IAsTaRWwBdU/cTdbL9DNySROr4cdb7z7q8vUCOolSjjT7vPuYBu2AAAAAAAAAAAAGsJqSqcuODIAbW0NSMbL38trd+KA0tCyi0tW7iTWLxyv6RAm0vEKTk6gm2Rqwx4jKXu6Es8nHTFKEfKIErTB3L5peXgjKUnKTbdti2QAAAAAAAAAAAAAAAAAJi3FprlEACZScnbdsgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//Z" alt="32MM Valve (Cock)" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">32MM Valve (Cock)</div>
+            <div class="prod-sizes">32MM</div>
+            <div class="prod-specs">UV Resistant · Leak-Proof</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%2032MM%20Valve%20(Cock)%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,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" alt="16MM Lay Flat Punching" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">16MM Lay Flat Punching</div>
+            <div class="prod-sizes">16MM</div>
+            <div class="prod-specs">Heavy Duty Tool</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%2016MM%20Lay%20Flat%20Punching%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,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" alt="20MM Lay Flat Punching" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">20MM Lay Flat Punching</div>
+            <div class="prod-sizes">20MM</div>
+            <div class="prod-specs">Heavy Duty Tool</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%2020MM%20Lay%20Flat%20Punching%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,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" alt="25MM Lay Flat Punching" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">25MM Lay Flat Punching</div>
+            <div class="prod-sizes">25MM</div>
+            <div class="prod-specs">Heavy Duty Tool</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%2025MM%20Lay%20Flat%20Punching%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img-wrap">
+            <img src="data:image/jpeg;base64,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" alt="32MM Lay Flat Punching" class="prod-img"/>
+          </div>
+          <div class="prod-body">
+            <div class="prod-name">32MM Lay Flat Punching</div>
+            <div class="prod-sizes">32MM</div>
+            <div class="prod-specs">Heavy Duty Tool</div>
+            <a class="prod-enquire" href="https://wa.me/916300996391?text=Enquiry%20for%2032MM%20Lay%20Flat%20Punching%20-%20RR%20Agros" target="_blank">
+              Enquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <div>
+    <div class="cta-title">Ready to <span>Order?</span></div>
+    <p class="cta-sub">Call or WhatsApp directly — we respond fast.</p>
+  </div>
+  <div class="cta-actions">
+    <a href="https://wa.me/916300996391" target="_blank" class="btn-primary">WhatsApp Us</a>
+    <a href="tel:6300996391" class="btn-ghost">Call Now</a>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="f-logo-rr">RR</div>
+    <div class="f-logo-agros">Agros</div>
+  </div>
+  <span class="f-copy">© 2025 RR Agros Drip Irrigation Systems</span>
+</footer>
+
+</body>
+</html>
